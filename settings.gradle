@@ -1,0 +1,2 @@
+rootProject.name='Tymer'
+include ':app'
