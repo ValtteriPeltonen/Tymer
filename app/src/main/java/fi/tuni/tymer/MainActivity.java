@@ -1,10 +1,16 @@
 package fi.tuni.tymer;
 
+import android.content.Intent;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
+import android.os.Build;
+import android.os.Bundle;
+import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -15,6 +21,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        new Thread(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void run() {
+                while (1 > 0) {
+                    try {
+                        Thread.sleep(10);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                TextView mainClock = findViewById(R.id.mainClock);
+                                mainClock.setText((String) new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (NullPointerException r) {
+                        r.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
 
     @OnClick(R.id.toAlarmFromClock)
