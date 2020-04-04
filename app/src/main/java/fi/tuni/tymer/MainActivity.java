@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -21,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        startClock();
+    }
 
+    public void startClock() {
         new Thread(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
