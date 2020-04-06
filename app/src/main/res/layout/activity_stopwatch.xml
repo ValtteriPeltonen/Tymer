@@ -51,4 +51,16 @@
         android:textSize="36sp"
         app:autoSizeTextType="none" />
 
+    <Button
+        android:id="@+id/stopwatchResetLap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset" />
+
+    <Button
+        android:id="@+id/stopwatchStartStop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start" />
+
 </LinearLayout>
