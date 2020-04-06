@@ -45,16 +45,11 @@ public class TimerActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 if (ongoing) {
-                    countDownTimer.cancel();
-
-                    timerStartStop.setText("start");
-
-                    ongoing = false;
-
-                    mainTimerHour.setText("00");
-                    mainTimerMinute.setText("00");
-                    mainTimerSecond.setText("00");
+                    stopTimer();
                 }
+                mainTimerHour.setText("HH");
+                mainTimerMinute.setText("MM");
+                mainTimerSecond.setText("SS");
                 return true;
             }
         });
@@ -68,44 +63,75 @@ public class TimerActivity extends AppCompatActivity {
     public void onClickTimerStartStop() {
         if (!ongoing) {
             timerStartStop.setText("stop");
+            setEditText(false);
             countDownTimer = new CountDownTimer(timerToMilliseconds(), 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     if ( (int) millisUntilFinished / 360000 != 0) {
-                        mainTimerHour.setText((int) millisUntilFinished / 360000);
+                        mainTimerHour.setText((int) (millisUntilFinished / 360000) % 24 + "");
                     }
                     if ( (int) millisUntilFinished % 360000 / 60000 != 0) {
-                        mainTimerMinute.setText((int) millisUntilFinished % 360000 / 60000);
+                        mainTimerMinute.setText((int) (millisUntilFinished / 60000) % 60 + "");
                     }
-                    mainTimerSecond.setText( (int) millisUntilFinished % 360000 % 60000 / 1000);
+                    mainTimerSecond.setText( (int) (millisUntilFinished / 1000) % 60 + "");
                 }
 
                 @Override
                 public void onFinish() {
-                    ongoing = false;
+                    stopTimer();
+                    mainTimerHour.setText("HH");
+                    mainTimerMinute.setText("MM");
+                    mainTimerSecond.setText("SS");
                 }
             }.start();
 
             ongoing = true;
 
         } else if (ongoing) {
-            countDownTimer.cancel();
-
-            timerStartStop.setText("start");
-
-            ongoing = false;
+            stopTimer();
         }
+    }
+
+    protected void stopTimer() {
+        countDownTimer.cancel();
+
+        timerStartStop.setText("start");
+
+        setEditText(true);
+
+        ongoing = false;
     }
 
     protected long timerToMilliseconds() {
+        long millis = 0;
         try {
-            return (((Integer.parseInt(String.valueOf(mainTimerHour.getText())) * 60) + (Integer.parseInt(String.valueOf(mainTimerMinute.getText()))) * 60) + Integer.parseInt(String.valueOf(mainTimerSecond.getText()))) * 1000;
+            millis += Long.parseLong(String.valueOf(mainTimerHour.getText())) * 360000;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+        try {
+            millis += Long.parseLong(String.valueOf(mainTimerMinute.getText())) * 60000;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            millis += Long.parseLong(String.valueOf(mainTimerSecond.getText())) * 1000;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return millis;
     }
 
+    protected void setEditText(boolean editable) {
+        mainTimerHour.setFocusable(editable);
+        mainTimerHour.setClickable(editable);
+
+        mainTimerMinute.setFocusable(editable);
+        mainTimerMinute.setClickable(editable);
+
+        mainTimerSecond.setFocusable(editable);
+        mainTimerSecond.setClickable(editable);
+    }
 
     @OnClick(R.id.toClockFromTimer)
     public void toClockFromTimer() {
