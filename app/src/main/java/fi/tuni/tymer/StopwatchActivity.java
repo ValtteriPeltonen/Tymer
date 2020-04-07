@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -61,6 +63,13 @@ public class StopwatchActivity extends AppCompatActivity {
                 int seconds = 0;
                 int minutes = 0;
                 int hours = 0;
+
+                if (!mainStopwatch.getText().equals("00:00:00")) {
+                    String[] time = mainStopwatch.getText().toString().split(":");
+                    seconds = Integer.parseInt(time[2]);
+                    minutes = Integer.parseInt(time[1]);
+                    hours = Integer.parseInt(time[0]);
+                }
                 while (ongoing) {
                     try {
                         Thread.sleep(1000);
