@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Objects;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,6 +17,8 @@ public class StopwatchActivity extends AppCompatActivity {
 
     protected boolean ongoing = false;
     protected Thread thread;
+    protected ArrayList<String> lapList = new ArrayList<>();
+    protected int laps = 0;
 
     @BindView(R.id.stopwatchStartStop)
     protected Button stopwatchStartStop;
@@ -24,6 +26,16 @@ public class StopwatchActivity extends AppCompatActivity {
     protected Button stopwatchResetLap;
     @BindView(R.id.mainStopwatch)
     protected TextView mainStopwatch;
+    @BindView(R.id.lap1)
+    protected TextView lap1;
+    @BindView(R.id.lap2)
+    protected TextView lap2;
+    @BindView(R.id.lap3)
+    protected TextView lap3;
+    @BindView(R.id.lap4)
+    protected TextView lap4;
+    @BindView(R.id.lap5)
+    protected TextView lap5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +56,31 @@ public class StopwatchActivity extends AppCompatActivity {
     @OnClick(R.id.stopwatchResetLap)
     protected void onClickStopwatchResetLap() {
         if (ongoing) {
-
+            laps += 1;
+            if (laps == 1) {
+                lap1.setText(mainStopwatch.getText());
+            }
+            if (laps == 2) {
+                lap2.setText(mainStopwatch.getText());
+            }
+            if (laps == 3) {
+                lap3.setText(mainStopwatch.getText());
+            }
+            if (laps == 4) {
+                lap4.setText(mainStopwatch.getText());
+            }
+            if (laps == 5) {
+                lap5.setText(mainStopwatch.getText());
+            }
         } else {
             TextView mainStopwatch = findViewById(R.id.mainStopwatch);
+            laps = 0;
             mainStopwatch.setText("00:00:00");
+            lap1.setText("");
+            lap2.setText("");
+            lap3.setText("");
+            lap4.setText("");
+            lap5.setText("");
         }
     }
 
