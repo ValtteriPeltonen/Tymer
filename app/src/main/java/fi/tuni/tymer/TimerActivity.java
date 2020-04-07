@@ -67,13 +67,17 @@ public class TimerActivity extends AppCompatActivity {
             countDownTimer = new CountDownTimer(timerToMilliseconds(), 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-                    if ( (int) millisUntilFinished / 360000 != 0) {
-                        mainTimerHour.setText((int) (millisUntilFinished / 360000) % 24 + "");
+                    if (Integer.parseInt(String.valueOf(mainTimerSecond.getText())) == 0) {
+                        mainTimerSecond.setText("59");
+                        if (Integer.parseInt(String.valueOf(mainTimerMinute.getText())) == 0) {
+                            mainTimerMinute.setText("59");
+                            mainTimerHour.setText(Integer.parseInt(String.valueOf(mainTimerHour.getText())) - 1 +"");
+                        } else {
+                            mainTimerMinute.setText(Integer.parseInt(String.valueOf(mainTimerMinute.getText())) - 1 +"");
+                        }
+                    } else {
+                        mainTimerSecond.setText(Integer.parseInt(String.valueOf(mainTimerSecond.getText())) - 1 +"");
                     }
-                    if ( (int) millisUntilFinished % 360000 / 60000 != 0) {
-                        mainTimerMinute.setText((int) (millisUntilFinished / 60000) % 60 + "");
-                    }
-                    mainTimerSecond.setText( (int) (millisUntilFinished / 1000) % 60 + "");
                 }
 
                 @Override
