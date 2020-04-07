@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Main class which holds a clock, which updates itself every 10 milliseconds.
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -23,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         startClock();
     }
 
+    /**
+     * Starts new the runnable which gets time from Android calendar class and formats it to the wanted form every 10 milliseconds
+     */
     public void startClock() {
         new Thread(new Runnable() {
             @RequiresApi(api = Build.VERSION_CODES.N)

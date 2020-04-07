@@ -13,6 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ *Class which holds the Timer functions.
+ */
 public class TimerActivity extends AppCompatActivity {
 
     @BindView(R.id.timerStartStop)
@@ -34,12 +37,19 @@ public class TimerActivity extends AppCompatActivity {
         initMainTimer();
     }
 
+    /**
+     * Checks if timer has been initialized and if it hasn't, then it initializes the timer.
+     */
     protected void initMainTimer() {
         if (!ongoing) {
             initTimerStopStartButton();
         }
     }
 
+    /**
+     * Adds long click for timerStartStopButton.
+     * Resets timer.
+     */
     protected void initTimerStopStartButton() {
         timerStartStop.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -59,6 +69,10 @@ public class TimerActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * If Timer has started, timerStartStop-button will stop it.
+     * If Timer hasn't started, timerStartStop-button will start it.
+     */
     @OnClick(R.id.timerStartStop)
     public void onClickTimerStartStop() {
         if (!ongoing) {
@@ -96,6 +110,9 @@ public class TimerActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Stops timer
+     */
     protected void stopTimer() {
         countDownTimer.cancel();
 
@@ -106,6 +123,10 @@ public class TimerActivity extends AppCompatActivity {
         ongoing = false;
     }
 
+    /**
+     * Turns hours, minutes and seconds to milliseconds.
+     * @return milliseconds
+     */
     protected long timerToMilliseconds() {
         long millis = 0;
         try {
@@ -126,6 +147,10 @@ public class TimerActivity extends AppCompatActivity {
         return millis;
     }
 
+    /**
+     * Makes or doesn't make time editable and focusable depending on given boolean.
+     * @param editable
+     */
     protected void setEditText(boolean editable) {
         mainTimerHour.setFocusable(editable);
         mainTimerHour.setClickable(editable);

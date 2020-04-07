@@ -13,6 +13,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Class which holds Stopwatch functions.
+ */
 public class StopwatchActivity extends AppCompatActivity {
 
     protected boolean ongoing = false;
@@ -44,6 +47,9 @@ public class StopwatchActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+    /**
+     * Checks if stopwatch is currently running or not.
+     */
     @OnClick(R.id.stopwatchStartStop)
     protected void onClickStopwatchStartStop() {
         if (ongoing) {
@@ -53,6 +59,10 @@ public class StopwatchActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Resets the stopwatch if it isn't running.
+     * Sets a lap if stopwatch is running.
+     */
     @OnClick(R.id.stopwatchResetLap)
     protected void onClickStopwatchResetLap() {
         if (ongoing) {
@@ -84,6 +94,9 @@ public class StopwatchActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Starts stopwatch and a thread which updates the stopwatch every 1000 milliseconds.
+     */
     protected void starStopwatch() {
         ongoing = true;
 
@@ -138,6 +151,9 @@ public class StopwatchActivity extends AppCompatActivity {
         thread.start();
     }
 
+    /**
+     * Stops stopwatch.
+     */
     protected void stopStopwatch() {
         ongoing = false;
 

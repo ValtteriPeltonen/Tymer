@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Class which holds the alarm function
+ */
 public class AlarmActivity extends AppCompatActivity {
 
     @Override
