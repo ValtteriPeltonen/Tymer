@@ -34,20 +34,19 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void run() {
-                while (1 > 0) {
+                while (true) {
                     try {
                         Thread.sleep(10);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 TextView mainClock = findViewById(R.id.mainClock);
-                                mainClock.setText((String) new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()));
+                                String currentTime = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
+                                mainClock.setText(currentTime);
                             }
                         });
-                    } catch (InterruptedException e) {
+                    } catch (InterruptedException | NullPointerException e) {
                         e.printStackTrace();
-                    } catch (NullPointerException r) {
-                        r.printStackTrace();
                     }
                 }
             }
