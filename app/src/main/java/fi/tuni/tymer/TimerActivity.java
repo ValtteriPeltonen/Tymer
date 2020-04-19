@@ -149,17 +149,20 @@ public class TimerActivity extends AppCompatActivity {
 
     /**
      * Makes or doesn't make time editable and focusable depending on given boolean.
+     *
+     * Currently broken
+     *
      * @param editable
      */
     protected void setEditText(boolean editable) {
-        mainTimerHour.setFocusable(editable);
-        mainTimerHour.setClickable(editable);
+    //    mainTimerHour.setFocusable(editable);
+    //    mainTimerHour.setClickable(editable);
 
-        mainTimerMinute.setFocusable(editable);
-        mainTimerMinute.setClickable(editable);
+    //    mainTimerMinute.setFocusable(editable);
+    //    mainTimerMinute.setClickable(editable);
 
-        mainTimerSecond.setFocusable(editable);
-        mainTimerSecond.setClickable(editable);
+    //    mainTimerSecond.setFocusable(editable);
+    //    mainTimerSecond.setClickable(editable);
     }
 
     @OnClick(R.id.toClockFromTimer)
