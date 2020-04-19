@@ -110,12 +110,16 @@ public class AlarmActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Starts a background clock function which updates every 5 seconds
+     *
+     */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void startClock() {
         new Thread(() -> {
             while (true) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(5000);
                     runOnUiThread(() -> {
                         String currentTime = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
                         String[] time = currentTime.split(":");
@@ -130,6 +134,11 @@ public class AlarmActivity extends AppCompatActivity {
         }).start();
     }
 
+    /**
+     * Goes through every alarm checking if they are on, and if the hour and minutes match
+     *
+     * @param time
+     */
     protected void isMinute(String[] time) {
         for (int i = 1; i < 15; i++) {
             if (isOn(i)) {
@@ -142,6 +151,14 @@ public class AlarmActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Checks if timeType of the timer of the given alarm matches the currentTime
+     *
+     * @param timeType
+     * @param timerNumber
+     * @param currentTime
+     * @return
+     */
     protected boolean checkTime(int timeType, int timerNumber, String[] currentTime) {
         boolean alarm = false;
         String[] alarmTimerString;
@@ -201,6 +218,12 @@ public class AlarmActivity extends AppCompatActivity {
         return alarm;
     }
 
+    /**
+     * Checks if given alarm is on
+     *
+     * @param timerNumber
+     * @return
+     */
     private boolean isOn(int timerNumber) {
         Boolean alarm = false;
         switch (timerNumber) {
@@ -394,6 +417,9 @@ public class AlarmActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Plays alarm sound
+     */
     protected void alarmStart() {
         System.out.println("Alarm Start");
         MediaPlayer.create(this, R.raw.alarm).start();
