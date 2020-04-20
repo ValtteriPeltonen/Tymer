@@ -1,6 +1,7 @@
 package fi.tuni.tymer;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -17,6 +18,8 @@ import butterknife.OnClick;
  *Class which holds the Timer functions.
  */
 public class TimerActivity extends AppCompatActivity {
+
+    MediaPlayer mp = MediaPlayer.create(this, R.raw.alarm);
 
     @BindView(R.id.timerStartStop)
     Button timerStartStop;
@@ -100,6 +103,8 @@ public class TimerActivity extends AppCompatActivity {
                     mainTimerHour.setText("HH");
                     mainTimerMinute.setText("MM");
                     mainTimerSecond.setText("SS");
+
+                    mp.start();
                 }
             }.start();
 
