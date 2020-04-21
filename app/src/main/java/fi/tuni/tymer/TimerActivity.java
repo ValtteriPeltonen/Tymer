@@ -19,7 +19,6 @@ import butterknife.OnClick;
  */
 public class TimerActivity extends AppCompatActivity {
 
-    MediaPlayer mp = MediaPlayer.create(this, R.raw.alarm);
 
     @BindView(R.id.timerStartStop)
     Button timerStartStop;
@@ -104,7 +103,6 @@ public class TimerActivity extends AppCompatActivity {
                     mainTimerMinute.setText("MM");
                     mainTimerSecond.setText("SS");
 
-                    mp.start();
                 }
             }.start();
 

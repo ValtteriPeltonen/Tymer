@@ -123,7 +123,7 @@ public class AlarmActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         String currentTime = new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
                         String[] time = currentTime.split(":");
-                        if (time[1].equals("00")) {
+                        if (time[2].equals("00")) {
                             isMinute(time);
                         }
                     });
